@@ -29,5 +29,5 @@ For devoloping with this app for android on a Windows device you will need the a
 
 Not sure I don't have a Mac.
 
-[!Important]
+[!IMPORTANT]
 Make sure you install of the necessary packages with npm.

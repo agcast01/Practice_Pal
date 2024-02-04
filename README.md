@@ -5,7 +5,7 @@ Practice Pal is an app meant to help to keep up with your music practice. This i
 
 ## Features
 
-- Practice Log
-- Audio Recording
-- PDF examples
+- [ ] Practice Log
+- [ ] Audio Recording
+- [ ] PDF examples
 

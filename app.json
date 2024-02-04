@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "practice-pal",
+    "slug": "practice-pal",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

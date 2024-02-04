@@ -9,3 +9,12 @@ Practice Pal is an app meant to help to keep up with your music practice. This i
 - [ ] Audio Recording
 - [ ] PDF examples
 
+## Frameworks
+
+### React-Expo
+
+For the frontend this app utilized react native and expo.
+
+### Express
+
+For the backend this app utilizes Express.js

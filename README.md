@@ -18,3 +18,13 @@ For the frontend this app utilized react native and expo.
 ### Express
 
 For the backend this app utilizes Express.js
+
+## Setting Up Development Environment
+
+### Windows/Android
+
+For devoloping with this app for android on a Windows device you will need the android studio for its emulator. You will also need to be using at least Java 17.
+
+### MacOS/IOS
+
+Not sure I don't have a Mac.

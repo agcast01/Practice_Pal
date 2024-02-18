@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {Text, View, FlatList} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Text, View, FlatList, StyleSheet } from 'react-native'
 
 const getUsers = async () => {
   const response = await fetch('http://192.168.1.218:3000/')
@@ -11,16 +11,27 @@ export default function User() {
   const [users, setUsers] = useState([])
   useEffect(() => {
     getUsers().then(res => setUsers(res))
-    console.log(users)
   }, [])
 
   return (
     <View>
       <Text>Users</Text>
-      <FlatList 
+      <FlatList
         data={users}
-        renderItem={({item}) => <Text>{item.email}</Text>}
+        renderItem={({ item }) => <Text style={styles.item}>{item.email}</Text>}
+        style={styles.list}
       />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: 'grey',
+
+  },
+  list: {
+    backgroundColor: 'yellow',
+    flexGrow: 0,
+  }
+})

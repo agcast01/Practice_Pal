@@ -3,6 +3,7 @@ import { Text, View, FlatList, StyleSheet, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
 import { logout } from '../../state/user';
+import Signup from './Signup';
 //import { logout } from '../../state/user';
 
 export default function User() {
@@ -19,7 +20,11 @@ export default function User() {
   return (
     <View>
       <Text>Current User: {user.data && user.data.email}</Text>
-      {!user.data && <Login />}
+      {!user.data && 
+      <View>
+        <Login />
+        <Signup />
+      </View>}
       {user.data && <Button 
         title="Logout"
         onPress={() => {

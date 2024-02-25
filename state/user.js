@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const login = createAsyncThunk("login", async (payload) => {
   try {
-    console.log("Action Payload: ", JSON.stringify(payload))
+    //console.log("Action Payload: ", JSON.stringify(payload))
     const response = await fetch('http://172.19.224.1:3000/users/login', {
       method: 'POST',
       headers: {
@@ -10,6 +10,7 @@ export const login = createAsyncThunk("login", async (payload) => {
       },
       body: JSON.stringify(payload)
     })
+    if(!response.ok) throw new Error("User not found that matches email and password combo")
     const data = await response.json();
     console.log("User: ", data)
 
@@ -19,9 +20,15 @@ export const login = createAsyncThunk("login", async (payload) => {
   }
 })
 
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {},
+  reducers: {
+    logout: (state) => {
+      state.data = null;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state, action) => {
       state.isLoading = true;
@@ -36,4 +43,6 @@ export const userSlice = createSlice({
   }
 })
 
-export default userSlice.reducer
+export default userSlice.reducer;
+
+export const { logout } = userSlice.actions;

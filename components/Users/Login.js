@@ -5,7 +5,6 @@ import { login } from "../../state/user";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const onSubmit = async () => {

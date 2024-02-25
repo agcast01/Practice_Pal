@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, FlatList, StyleSheet, Button } from 'react-native'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
+import { logout } from '../../state/user';
+//import { logout } from '../../state/user';
 
 export default function User() {
+  const dispatch = useDispatch();
   const [users, setUsers] = useState([])
   const [buttonColor, setButtonColor] = useState(true)
-  const user = useSelector(state => state.user.data)
+  const user = useSelector(state => state.user)
   useEffect(() => {
     console.log(user)
   }, [buttonColor])
@@ -15,8 +18,14 @@ export default function User() {
 
   return (
     <View>
-      <Text>Current User: {user && user.email}</Text>
-      <Login />
+      <Text>Current User: {user.data && user.data.email}</Text>
+      {!user.data && <Login />}
+      {user.data && <Button 
+        title="Logout"
+        onPress={() => {
+          dispatch(logout())
+        }}
+      />}
       <Button 
         title="Update State" 
         style={styles.button}

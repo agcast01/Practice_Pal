@@ -13,7 +13,7 @@ export const loadSessions = createAsyncThunk("loadSessions", async (payload) => 
 
 export const createSession = createAsyncThunk("createSession", async (payload) => {
   try {
-    console.log("Payload: ", payload)
+    //console.log("Payload: ", payload)
     const response = await fetch(`http://172.28.192.1:3000/sessions/newSession`, {
       method: 'POST',
       headers: {
@@ -26,6 +26,15 @@ export const createSession = createAsyncThunk("createSession", async (payload) =
   } catch (e) {
     console.log(e)
   }
+})
+
+export const deleteSession = createAsyncThunk('deleteSession', async (payload) => {
+  const {sessionId} = payload;
+  const response = await fetch(`http://172.28.192.1:3000/sessions/${sessionId}/delete`, {
+    method:'DELETE'
+  });
+  const data = await response.text()
+  return sessionId
 })
 
 export const sessionsSlice = createSlice({
@@ -50,6 +59,16 @@ export const sessionsSlice = createSlice({
       state.data = [...state.data, action.payload];
     }),
     builder.addCase(createSession.rejected, (state, action) => {
+      state.isLoading = false
+    }),
+    builder.addCase(deleteSession.pending, (state, action) => {
+      state.isLoading = true;
+    }),
+    builder.addCase(deleteSession.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.data = state.data.filter(session => session.id != action.payload)
+    }),
+    builder.addCase(deleteSession.rejected, (state, action) => {
       state.isLoading = false
     })
   }

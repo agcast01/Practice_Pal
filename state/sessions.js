@@ -11,6 +11,23 @@ export const loadSessions = createAsyncThunk("loadSessions", async (payload) => 
   }
 })
 
+export const createSession = createAsyncThunk("createSession", async (payload) => {
+  try {
+    console.log("Payload: ", payload)
+    const response = await fetch(`http://172.28.192.1:3000/sessions/newSession`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(payload)
+    })
+    const data = await response.json()
+    return data
+  } catch (e) {
+    console.log(e)
+  }
+})
+
 export const sessionsSlice = createSlice({
   name: 'sessions',
   initialState: {},
@@ -23,6 +40,16 @@ export const sessionsSlice = createSlice({
       state.data = action.payload;
     }),
     builder.addCase(loadSessions.rejected, (state, action) => {
+      state.isLoading = false
+    }),
+    builder.addCase(createSession.pending, (state, action) => {
+      state.isLoading = true;
+    }),
+    builder.addCase(createSession.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.data = [...state.data, action.payload];
+    }),
+    builder.addCase(createSession.rejected, (state, action) => {
       state.isLoading = false
     })
   }

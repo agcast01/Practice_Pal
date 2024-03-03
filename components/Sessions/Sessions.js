@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { UseDispatch, useDispatch, useSelector } from "react-redux";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, StyleSheet } from "react-native";
 import { loadSessions } from "../../state/sessions";
+import AddSession from "./AddSession";
 
 export default function Session() {
   const dispatch = useDispatch()
@@ -9,10 +10,10 @@ export default function Session() {
   const sessions = useSelector(state => state.sessions.data)
   useEffect(() => {
     dispatch(loadSessions(user.data.id))
-    console.log(sessions)
+    //console.log(sessions)
   }, [])
   return(<>
-  <Text>Sessions Here</Text>
+  <Text style={styles.title}>Sessions</Text>
   <FlatList 
     data={sessions}
     renderItem={({item}) => <Text>{item.title}</Text>}
@@ -21,5 +22,14 @@ export default function Session() {
       flexGrow: 0
     }}
   />
+  <AddSession />
   </>)
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontWeight: "bold",
+    textAlign: 'center',
+    fontSize: 18,
+  }
+})

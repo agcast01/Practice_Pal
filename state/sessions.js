@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loadSessions = createAsyncThunk("load", async (userId) => {
+export const loadSessions = createAsyncThunk("loadSessions", async (payload) => {
   try {
-    const response = await fetch(`http://172.28.192.1:3000/sessions/${userId}`)
+    const response = await fetch(`http://172.28.192.1:3000/sessions/${payload}`)
     if(!response.ok) throw new Error("Error")
     const data = await response.json();
-  return data
+    return data
   } catch (e) {
-    console.log(e.message)
+    console.log(e)
   }
 })
 
-export const sessionSlice = createSlice({
+export const sessionsSlice = createSlice({
   name: 'sessions',
-  initialState: [],
+  initialState: {},
   extraReducers: (builder) => {
     builder.addCase(loadSessions.pending, (state, action) => {
       state.isLoading = true;
@@ -28,4 +28,4 @@ export const sessionSlice = createSlice({
   }
 })
 
-export default sessionSlice.reducer
+export default sessionsSlice.reducer

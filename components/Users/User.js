@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
 import { logout } from '../../state/user';
 import Signup from './Signup';
+import Session from '../Sessions/Sessions';
+import { loadSessions } from '../../state/sessions';
 //import { logout } from '../../state/user';
 
 export default function User() {
   const dispatch = useDispatch();
-  const [users, setUsers] = useState([])
   const [buttonColor, setButtonColor] = useState(true)
   const user = useSelector(state => state.user)
+  
   useEffect(() => {
-    console.log(user)
-  }, [buttonColor])
+    //console.log(user)
+  }, [buttonColor, user])
 
   
 
@@ -25,12 +27,14 @@ export default function User() {
         <Login />
         <Signup />
       </View>}
-      {user.data && <Button 
+      {user.data && <><Button 
         title="Logout"
         onPress={() => {
           dispatch(logout())
         }}
-      />}
+      />
+      <Session />
+      </>}
       <Button 
         title="Update State" 
         style={styles.button}

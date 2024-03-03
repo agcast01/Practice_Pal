@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const login = createAsyncThunk("login", async (payload) => {
   try {
     //console.log("Action Payload: ", JSON.stringify(payload))
-    const response = await fetch('http://172.19.224.1:3000/users/login', {
+    const response = await fetch('http://172.28.192.1:3000/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -12,7 +12,7 @@ export const login = createAsyncThunk("login", async (payload) => {
     })
     if(!response.ok) throw new Error("User not found that matches email and password combo")
     const data = await response.json();
-    console.log("User: ", data);
+    //console.log("User: ", data);
 
     return data;
   } catch (e){
@@ -22,7 +22,7 @@ export const login = createAsyncThunk("login", async (payload) => {
 
 export const signup = createAsyncThunk("signup", async(payload) => {
   try {
-    const response = await fetch('http://172.19.224.1:3000/users/signup', {
+    const response = await fetch('http://172.28.192.1:3000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export const signup = createAsyncThunk("signup", async(payload) => {
     });
     if (!response.ok) throw new Error("Email must be unique.")
     const data = await response.json()
-  console.log("User: ", data);
+  //console.log("User: ", data);
 
   return data
   } catch (error) {
